@@ -1,16 +1,28 @@
 class Player
   attr_reader :name, :lives
-
   def initialize(name)
     @name = name
-    @lives = lives = 3
+    @lives = 3
+  end
+
+  def take_life
+    @lives -= 1
+  end
+
+  def is_dead
+    @lives == 0
   end
 
   def new_question
     new_question = Question.new
-    puts "#{name}: What does #{new_question.num1} plus #{new_question.num2} equal?"
+    new_question.ask_question(name)
     print '> '
-    @userchoice = $stdin.get.chomp
+    @userchoice = $stdin.gets.chomp
     if new_question.check_answer?(@userchoice.to_i)
-      puts "YES! You Are Correct."
+      puts 'Yes! You are correct.'
+    else
+      puts 'Seriously? No!'
+      take_life
+    end
+  end
 end

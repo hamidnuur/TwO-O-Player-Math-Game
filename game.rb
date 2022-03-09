@@ -13,4 +13,5 @@ class Game
     pp @player_2
     # turn
   end
+
 end
